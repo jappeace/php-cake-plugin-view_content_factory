@@ -6,7 +6,7 @@ App::uses('AppModel', 'Model');
  * @property SheetContent $SheetContent
  * @property SheetStructure $SheetStructure
  */
-class Sheet extends AppModel {
+class Sheet extends ViewContentFactoryAppModel {
 
 /**
  * Validation rules

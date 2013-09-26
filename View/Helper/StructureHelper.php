@@ -9,7 +9,7 @@
  * big to reside in a single element file. Besides this code is way to complex for a mere view.
  * @author jappie
  */
-class StructureHelper extends AppHelper {
+class StructureHelper extends ViewContentFactoryAppHelper {
 
     /**
      * container for values from earlier builds.

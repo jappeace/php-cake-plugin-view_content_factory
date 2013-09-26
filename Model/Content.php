@@ -4,7 +4,7 @@ App::uses('AppModel', 'Model');
  * Content Model
  *
  */
-class Content extends AppModel {
+class Content extends ViewContentFactoryAppModel {
 
 /**
  * Validation rules

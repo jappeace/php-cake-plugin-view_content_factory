@@ -6,7 +6,7 @@ App::uses('AppModel', 'Model');
  * overkill since I do not inted to be able to edit files from the site.
  *
  */
-class Template extends AppModel {
+class Template extends ViewContentFactoryAppModel {
 
     const MARKER_CONTENT = '!content!';
     const MARKER_STRUCT = '!struct!';

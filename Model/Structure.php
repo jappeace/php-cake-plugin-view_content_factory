@@ -6,7 +6,7 @@ App::uses('AppModel', 'Model');
  * @property Structure $ParentStructure
  * @property Structure $ChildStructure
  */
-class Structure extends AppModel {
+class Structure extends ViewContentFactoryAppModel {
 
 /**
  * Behaviors

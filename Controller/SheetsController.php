@@ -8,8 +8,8 @@ App::uses('AppController', 'Controller');
  * @property Sheet $Sheet
  * @property PaginatorComponent $Paginator
  */
-class SheetsController extends AppController {
-    public $helpers = array('Js' => array('Jquery'), 'Structure');
+class SheetsController extends ViewContentFactoryAppController {
+    public $helpers = array('Js' => array('Jquery'), 'ViewContentFactory.Structure');
     /**
      * Components
      *

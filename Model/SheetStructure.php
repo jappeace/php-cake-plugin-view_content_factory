@@ -6,7 +6,7 @@ App::uses('AppModel', 'Model');
  * @property Sheet $Sheet
  * @property Structure $Structure
  */
-class SheetStructure extends AppModel {
+class SheetStructure extends ViewContentFactoryAppModel {
 
 /**
  * Display field
