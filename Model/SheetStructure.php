@@ -41,20 +41,8 @@ class SheetStructure extends ViewContentFactoryAppModel {
  * @var array
  */
 	public $belongsTo = array(
-		'Sheet' => array(
-			'className' => 'Sheet',
-			'foreignKey' => 'sheet_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
-		'Structure' => array(
-			'className' => 'Structure',
-			'foreignKey' => 'structure_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		)
+		'ViewContentFactory.Sheet',
+		'ViewContentFactory.Structure'
 	);
         /**
          * parses the data from the form (wich is order prety non convetional) and inserts it into the db

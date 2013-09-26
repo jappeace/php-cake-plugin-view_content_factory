@@ -34,31 +34,11 @@ class Sheet extends ViewContentFactoryAppModel {
  * @var array
  */
 	public $hasMany = array(
-		'SheetContent' => array(
-			'className' => 'SheetContent',
-			'foreignKey' => 'sheet_id',
-			'dependent' => true,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
+		'ViewContentFactory.SheetContent' => array(
+			'dependent' => true
 		),
-		'SheetStructure' => array(
-			'className' => 'SheetStructure',
-			'foreignKey' => 'sheet_id',
-			'dependent' => true,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
+		'ViewContentFactory.SheetStructure' => array(
+			'dependent' => true
 		)
 	);
         public $hasOne = 'Template';

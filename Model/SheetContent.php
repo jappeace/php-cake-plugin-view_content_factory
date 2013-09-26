@@ -41,20 +41,8 @@ class SheetContent extends ViewContentFactoryAppModel {
  * @var array
  */
 	public $belongsTo = array(
-		'Sheet' => array(
-			'className' => 'Sheet',
-			'foreignKey' => 'sheet_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
-		'Content' => array(
-			'className' => 'Content',
-			'foreignKey' => 'content_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		)
+		'ViewContentFactory.Sheet',
+		'ViewContentFactory.Content'
 	);
         /**
          * parses the data form a form and saves it in to the proper table

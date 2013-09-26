@@ -39,11 +39,8 @@ class Structure extends ViewContentFactoryAppModel {
  */
 	public $belongsTo = array(
 		'ParentStructure' => array(
-			'className' => 'Structure',
-			'foreignKey' => 'parent_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
+			'className' => 'ViewContentFactory.Structure',
+			'foreignKey' => 'parent_id'
 		)
 	);
 
@@ -54,17 +51,9 @@ class Structure extends ViewContentFactoryAppModel {
  */
 	public $hasMany = array(
 		'ChildStructure' => array(
-			'className' => 'Structure',
+			'className' => 'ViewContentFactory.Structure',
 			'foreignKey' => 'parent_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
+			'dependent' => true
 		)
 	);
         
