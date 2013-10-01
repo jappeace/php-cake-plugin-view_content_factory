@@ -41,7 +41,7 @@ class Sheet extends ViewContentFactoryAppModel {
 			'dependent' => true
 		)
 	);
-        public $hasOne = 'Template';
+        public $hasOne = 'ViewContentFactory.Template';
         
         /**
          * interpets the data from the database by selecting a sheet by name and then call the
