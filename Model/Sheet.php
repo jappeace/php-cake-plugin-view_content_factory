@@ -34,14 +34,20 @@ class Sheet extends ViewContentFactoryAppModel {
  * @var array
  */
 	public $hasMany = array(
-		'ViewContentFactory.SheetContent' => array(
+		'SheetContent' => array(
+			'className' => 'ViewContentFactory.SheetContent',
 			'dependent' => true
 		),
-		'ViewContentFactory.SheetStructure' => array(
+	    	'SheetStructure' => array(
+			'className' => 'ViewContentFactory.SheetStructure',
 			'dependent' => true
 		)
 	);
-        public $hasOne = 'ViewContentFactory.Template';
+        public $hasOne = array(
+		'Template' => array(
+		    'className' => 'ViewContentFactory.Template'
+		)
+	    );
         
         /**
          * interpets the data from the database by selecting a sheet by name and then call the

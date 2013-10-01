@@ -42,6 +42,7 @@ class Structure extends ViewContentFactoryAppModel {
 			'className' => 'ViewContentFactory.Structure',
 			'foreignKey' => 'parent_id'
 		)
+
 	);
 
 /**
