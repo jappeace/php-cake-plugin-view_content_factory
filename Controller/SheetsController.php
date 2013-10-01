@@ -19,6 +19,25 @@ class SheetsController extends ViewContentFactoryAppController {
     
     public function beforeFilter() {
 
+	/**
+	 * Only allows view actions open for public use. Don't forget to define your own authcomponent
+	 * in the your appcontroller class ie:
+	     public $components = array(
+        'Auth' => array(
+            'loginAction' => array(
+		'plugin' => false,
+                'controller' => 'people',
+                'action' => 'login'
+            ),
+            'authenticate' => array(
+                'Form' => array(
+                    'fields' => array('username' => 'email'),
+                    'userModel' => 'Person'
+                )
+            ),
+            'authorize' => 'Controller'
+        ));
+	 */
         parent::beforeFilter();
         $this->Auth->allow('view');
     }
@@ -114,6 +133,7 @@ class SheetsController extends ViewContentFactoryAppController {
                         )
                 )
             );
+            $this->set();
         }
     }
 

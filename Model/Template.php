@@ -2,8 +2,8 @@
 App::uses('AppModel', 'Model');
 
 /**
- * views should probably have its own model and a filesystem datasource, but I decided that was
- * overkill since I do not inted to be able to edit files from the site.
+ * This model represents the views that can be used as templates to create pages.
+ * Basicly it reads files and creates the apropiate structures for the files
  *
  */
 class Template extends ViewContentFactoryAppModel {
@@ -14,10 +14,9 @@ class Template extends ViewContentFactoryAppModel {
     const LFT_BOUND = '@#';
     const RGHT_BOUND = '#@';
     
-    const DIR = 'Structs';
-    
     public $useTable = false;
     public $useDbConfig = 'dummy';
+    
     public $belongsTo = 'ViewContentFactory.Sheet';
 
     /**
@@ -170,6 +169,6 @@ class Template extends ViewContentFactoryAppModel {
      * @return string
      */
     public function getPath(){
-        return '..'.DS.'View'.DS.'Sheets'.DS.  Template::DIR;
+        return '..'.DS.'View'.DS. Inflector::pluralize($this->alias);
     }
 }
