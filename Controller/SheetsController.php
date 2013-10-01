@@ -92,7 +92,6 @@ class SheetsController extends ViewContentFactoryAppController {
                 $this->Session->setFlash(__('The sheet could not be saved. Please, try again.'));
             }
         }
-	echo $this->Sheet->Template->getPath();
         $this->set('views', $this->Sheet->Template->parseViews());
     }
 

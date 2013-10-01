@@ -35,9 +35,6 @@ class Template extends ViewContentFactoryAppModel {
         App::uses('Folder', 'Utility');
         App::uses('File', 'Utility');
 	
-	echo $this->getPath() .'<br />'. $this->getPluginPath() . '<br /><pre>' . 
-		print_r((new Folder($this->getPluginPath()))->read(), true) .'</pre>';
-	
 	// merge templates from the plugin and the users and return them.
         return 
 	    array_merge(
@@ -106,7 +103,11 @@ class Template extends ViewContentFactoryAppModel {
             if (!$end) {
                 break;
             }
-            $string = substr($target, $postion + $lftBoundSize, $end + 2 -$postion - $lftBoundSize - $rghtBoundSize);
+            $string = substr(
+		$target, 
+		$postion + $lftBoundSize, 
+		$end + 2 -$postion - $lftBoundSize - $rghtBoundSize
+	    );
             $result[] = $string;
             $offset = $end;
         }
