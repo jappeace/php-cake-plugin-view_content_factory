@@ -5,7 +5,7 @@
  * This file is application-wide helper file. You can put all
  * application-wide helper-related methods here.
  */
-App::uses('Helper', 'View');
+App::uses('AppHelper', 'View');
 
 /**
  * Application helper

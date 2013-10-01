@@ -1,10 +1,10 @@
-<?php
-$this->extend('/Sheets/Structs/article-nav');
-$this->start('article');
-echo $this->element('form/sheet', array('views' => $template, 'values' => $values));
-
-?>
-<div class="actions structural">
+<div class="structural">
+    <?
+	echo $this->element('form/sheet', array('views' => $template, 'values' => $values));
+    ?>
+</div>
+<aside class="structural">
+    <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>
 	<ul>
 
@@ -15,7 +15,5 @@ echo $this->element('form/sheet', array('views' => $template, 'values' => $value
 		<li><?php echo $this->Html->link(__('List Sheet Structures'), array('controller' => 'sheet_structures', 'action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('New Sheet Structure'), array('controller' => 'sheet_structures', 'action' => 'add')); ?> </li>
 	</ul>
-</div>
-<?php
-$this->end();
-$this->assign('nav', $this->element('nav/acount'));
+    </div>
+</aside>
