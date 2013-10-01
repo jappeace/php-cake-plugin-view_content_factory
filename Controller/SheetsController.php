@@ -61,7 +61,7 @@ class SheetsController extends ViewContentFactoryAppController {
      */
     public function view($name = null) {
         $this->set('path', $this->Sheet->Template->getPath());
-        $this->render(Template::DIR . DS . 
+        $this->render($this->Sheet->Template->getPath(). DS . 
             // interpet function returns the view name
             $this->Sheet->interpet($name, 
                 function($key, $value){
@@ -91,7 +91,8 @@ class SheetsController extends ViewContentFactoryAppController {
             } else {
                 $this->Session->setFlash(__('The sheet could not be saved. Please, try again.'));
             }
-        }        
+        }  
+	
         $this->set('views', $this->Sheet->Template->parseViews());
     }
 

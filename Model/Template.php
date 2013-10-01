@@ -17,7 +17,9 @@ class Template extends ViewContentFactoryAppModel {
     public $useTable = false;
     public $useDbConfig = 'dummy';
     
-    public $belongsTo = 'ViewContentFactory.Sheet';
+    public $belongsTo = array('Sheet' => array(
+			'className' => 'ViewContentFactory.Sheet'
+			));
 
     /**
      * this function finds the view in the view/sheets/structs folder then it looks what is in side

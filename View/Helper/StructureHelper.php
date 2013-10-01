@@ -3,7 +3,6 @@
 /*
  *  See jappieklooster.nl/license for more information about the licensing
  */
-
 /**
  * CakePHP StructureHelper, I decided to move this logic to a helper because its was getting to
  * big to reside in a single element file. Besides this code is way to complex for a mere view.
