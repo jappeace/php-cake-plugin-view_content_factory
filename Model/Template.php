@@ -34,9 +34,20 @@ class Template extends ViewContentFactoryAppModel {
         //load classes
         App::uses('Folder', 'Utility');
         App::uses('File', 'Utility');
-        
+	
+	echo $this->getPath() .'<br />'. $this->getPluginPath() . '<br /><pre>' . 
+		print_r((new Folder($this->getPluginPath()))->read(), true) .'</pre>';
+	
+	// merge templates from the plugin and the users and return them.
+        return 
+	    array_merge(
+		$this->parse($this->getPath()), 
+		$this->parse($this->getPluginPath())
+	    );
+    }
+    private function parse($path){
         $result = array();
-        $dir = new Folder($this->getPath());
+        $dir = new Folder($path);
         $files = $dir->find('.*\.ctp');
         foreach ($files as $file) {
             
@@ -46,7 +57,7 @@ class Template extends ViewContentFactoryAppModel {
                 $this->parseView($file, $dir->pwd());
         }
 
-        return $result;
+        return $result;	
     }
     /**
      * alows parsing of a single file instead of a whole directory
@@ -167,10 +178,31 @@ class Template extends ViewContentFactoryAppModel {
     }
     
     /**
-     * put in a function because may chanche in future
+     * gets the path to the view templates
      * @return string
      */
     public function getPath(){
-        return '..'.DS.'View'.DS. Inflector::pluralize($this->alias);
+        return $this->pathCake().$this->pathView();
+    }
+    /**
+     * get the path to the plugin folder's view
+     * @return type
+     */
+    public function getPluginPath(){
+        return $this->pathCake().DS.'Plugin' .DS . $this->plugin .$this->pathView();
+    }
+    /**
+     * to the cake root dir
+     * @return type
+     */
+    private function pathCake(){
+	return ROOT. DS . APP_DIR;
+    }
+    /**
+     * to the final view
+     * @return type
+     */
+    private function pathView(){
+	return DS . 'View'.DS. Inflector::pluralize($this->alias);
     }
 }
