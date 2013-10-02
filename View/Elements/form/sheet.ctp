@@ -1,5 +1,5 @@
 <?php
-$this->Html->script('menu-grow-min', array('block' => 'script'));
+$this->Html->script('ViewContentFactory.menu-grow-min', array('block' => 'script'));
 if(isset($values)){
     $this->Structure->setValues($values);
 }
