@@ -9,5 +9,9 @@
     <?php echo $article; ?>
 </article>
 <aside class="sturctural">
-    <?=$nav?>
+    <nav>
+    <?php foreach($nav as $link){
+	?><a href="<?=$link['url']?>"><?=$link['title']?></a><?php
+    }?>
+    </nav>
 </aside>
