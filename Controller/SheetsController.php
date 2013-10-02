@@ -61,7 +61,7 @@ class SheetsController extends ViewContentFactoryAppController {
      */
     public function view($name = null) {
         $this->set('path', $this->Sheet->Template->getPath());
-        $this->render($this->Sheet->Template->getPath(). DS . 
+        $this->render($this->Sheet->Template->getViewdir(). DS . 
             // interpet function returns the view name
             $this->Sheet->interpet($name, 
                 function($key, $value){
@@ -133,7 +133,6 @@ class SheetsController extends ViewContentFactoryAppController {
                         )
                 )
             );
-            $this->set();
         }
     }
 

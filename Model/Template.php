@@ -204,6 +204,10 @@ class Template extends ViewContentFactoryAppModel {
      * @return type
      */
     private function pathView(){
-	return DS . 'View'.DS. Inflector::pluralize($this->alias);
+	return DS . 'View'.DS. getViewDir();
+    }
+    
+    public function getViewdir(){
+	return Inflector::pluralize($this->alias);
     }
 }
