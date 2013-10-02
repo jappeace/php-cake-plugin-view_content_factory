@@ -204,7 +204,7 @@ class Template extends ViewContentFactoryAppModel {
      * @return type
      */
     private function pathView(){
-	return DS . 'View'.DS. getViewDir();
+	return DS . 'View'.DS. $this->getViewdir();
     }
     
     public function getViewdir(){
