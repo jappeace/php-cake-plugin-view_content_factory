@@ -2,7 +2,7 @@
 
 This is a small cakephp plugin that can handle content management for you.
 
-It generates online forms based upon the templates it scans. you enter a name of a page, fil in the form
+It generates online forms based upon the templates it scans. you enter a name of a page, fill in the form
 And the page is created.
 You can customize the templates by using html/css/php just as you would using a regular view.
 
@@ -12,11 +12,12 @@ Which variables are filled by the script is decided by a small metascript. (see 
 
 ### Source
 
-Clone, submodule add or unzip into Plugin/ViewContentFactory this repo.
+Clone, submodule add or unzip into Plugin/ViewContentFactory.
 
 ### Database
 
-Make sure you have acces to an database and have the connection configured.
+Make sure you have access to an database and have the connection configured. This plugin relies
+on a default db configuration. If it should use a different one, configure it in the plugin appModel.
 
 #### The dummy source
 
@@ -28,7 +29,7 @@ Put this in your databaseconfig
 
 #### The other tables
 
-execute the Plugin/ViewContentFactory/Config/Schema/structure.sql onto your database.
+execute Plugin/ViewContentFactory/Config/Schema/structure.sql onto your database.
 
 ### plugin loading
 
@@ -40,11 +41,11 @@ Add this to your bootsrap.php
 
 ### Authentication
 
-Chose either the safe way or the workaround, but not both.
+Choose either the safe way or the workaround, but not both. (or your own authentication scheme).
 
 #### The safe way
 
-Configure you auth componenent in your appcontroller:
+Configure you auth component in your appcontroller:
 
     public $components = array(
         'Auth' => array(
@@ -77,9 +78,10 @@ Or delete the following lines from Plugin/ViewContentFactory/Controller/SheetsCo
         $this->Auth->allow('view');
     }
 
-### dynamic pages suport
+### dynamic pages support
 
-For the forms to grow, jquery is required. Otherwise it is not necisary.
+To be able to use growing forms you need to include jquery. Otherwise the buttons simply won't work.
+There is a lot of documentation about this on cakephp.
 
 ### Create your pages
 
@@ -90,7 +92,7 @@ options.
 
 To view a page goto www.yoursite.com/view/pagename
 
-## Feautures
+## Features
 
 + Form generation based upon (metadata) in your view(s)
 + Regular content fields.
@@ -101,11 +103,11 @@ To view a page goto www.yoursite.com/view/pagename
 ## Intended features
 
 + Reuse content on different sheets (pages).
-+ The content table used as a structure value, allows more data in structure value (now its maxed at 255).
-+ Configureable filter for input.
++ Use content as a structure value, allows more data in structure value (now its maxed at 255 chars).
++ Configurable filter for input.
 + Caching... Or do at least some benchmarking.
 
-## Not suported
+## Not supported
 
 + Users, this is up to your app. It only says that the views are public no more no less.
 + Plugins or modules, you can use CakePHP for this.
@@ -113,7 +115,7 @@ To view a page goto www.yoursite.com/view/pagename
 
 ## Meta script
 
-The meta script is parsed by the template model. It will parse evrything inside the View/Template
+The meta script is parsed by the template model. It will parse everything inside the View/Template
 directory inside the plugin and the root app. As long as the files end with .ctp
 
 ### Open tags
@@ -122,7 +124,7 @@ The parsing starts with the
 
     @# 
 
-charsequense and ends with 
+char sequence and ends with 
 
     #@ 
 
@@ -206,11 +208,11 @@ for a cms.
 
 ## Contributions
 
-Contriubtions are welcome. Do a pull request and I will reply as soon as possible.
+Contributions are welcome. Do a pull request and I will reply as soon as possible.
 
 ## Design philosophy
 
-I designed this system based upon a need not a desire, keeping the overal code base pretty small.
-I also used as much of CakePHP's power as possible. If you spot a way to do somthing more efficient, do a pull request
+I designed this system based upon a need not a desire, keeping the overall code base pretty small.
+I also used as much of CakePHP's power as possible. If you spot a way to do something more efficient, do a pull request
 or just mail me.
 
