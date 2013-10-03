@@ -8,6 +8,82 @@ You can customize the templates by using html/css/php just as you would using a 
 
 Which variables are filled by the script is decided by a small metascript. (see below).
 
+## Install
+
+### Source
+
+Clone, submodule add or unzip into Plugin/ViewContentFactory this repo.
+
+### Database
+
+Make sure you have acces to an database and have the connection configured.
+
+#### The dummy source
+
+Put this in your databaseconfig
+
+    public $dummy = array(
+	'datasource' => 'ViewContentFactory.DummySource'
+    );
+
+#### The other tables
+
+execute the Plugin/ViewContentFactory/Config/Schema/structure.sql onto your database.
+
+### plugin loading
+
+Add this to your bootsrap.php
+
+    CakePlugin::loadAll(array(
+	'ViewContentFactory' => array('bootstrap' => true, 'routes' => true)
+    ));
+
+### Authentication
+
+#### The safe way
+
+Configure you auth componenent in your appcontroller:
+
+    public $components = array(
+        'Auth' => array(
+            'loginAction' => array(
+		'plugin' => false,
+                'controller' => 'people',
+                'action' => 'login'
+            ),
+            'authenticate' => array(
+                'Form' => array(
+                    'fields' => array('username' => 'email'),
+                    'userModel' => 'Person'
+                )
+            ),
+            'authorize' => 'Controller'
+        )
+    );
+
+#### The workaround
+
+Or delete the following lines from Plugin/ViewContentFactory/Controller/SheetsController.php
+
+    public function beforeFilter() {
+
+	/**
+	 * Only allows view actions open for public use. Don't forget to define your own authcomponent
+	 * in the your appcontroller class
+	 */
+        parent::beforeFilter();
+        $this->Auth->allow('view');
+    }
+
+### Create your pages
+
+Goto www.youresite.com/view_content_factory/sheets/ where the generated index will show you your
+options.
+
+### View pages
+
+To view a page goto www.yoursite.com/view/pagename
+
 ## Feautures
 
 + Form generation based upon (metadata) in your view(s)

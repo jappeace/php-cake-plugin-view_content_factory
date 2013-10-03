@@ -21,22 +21,7 @@ class SheetsController extends ViewContentFactoryAppController {
 
 	/**
 	 * Only allows view actions open for public use. Don't forget to define your own authcomponent
-	 * in the your appcontroller class ie:
-	     public $components = array(
-        'Auth' => array(
-            'loginAction' => array(
-		'plugin' => false,
-                'controller' => 'people',
-                'action' => 'login'
-            ),
-            'authenticate' => array(
-                'Form' => array(
-                    'fields' => array('username' => 'email'),
-                    'userModel' => 'Person'
-                )
-            ),
-            'authorize' => 'Controller'
-        ));
+	 * in the your appcontroller class
 	 */
         parent::beforeFilter();
         $this->Auth->allow('view');
