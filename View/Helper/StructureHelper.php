@@ -195,7 +195,7 @@ class StructureHelper extends ViewContentFactoryAppHelper {
  * contains some vars wich have to do with the anonymous form/array uniqueness. 
  * Without making them huge.
  */
-class Menu {
+class Menu { // perhaps this class should get its own file...
 
     private $buttons;
     private $number;

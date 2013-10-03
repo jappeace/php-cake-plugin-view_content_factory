@@ -1,4 +1,14 @@
 <?php
+function existingButton($name){
+    return $this->Form->button(
+	 'find existing '.$element[$i],
+	 array(
+	    'class' => 'form-find',
+	    'type' => 'button',
+	    'value' => $element[$i]
+	)
+    );  
+}
 $this->Html->script('ViewContentFactory.menu-grow-min', array('block' => 'script'));
 if(isset($values)){
     $this->Structure->setValues($values);
@@ -53,6 +63,7 @@ foreach($views as $fileName => $contents){
                         )
                     );
                     
+		    echo existingButton($element[$i]);
                     ?>
                     </div>
                     <?php
@@ -72,6 +83,7 @@ foreach($views as $fileName => $contents){
                     echo $render->renderLi().
                             $varName.
                             $render->getButtons().
+			    existingButton($varName).
                             $this->Structure->input($part, $path). 
                         '</li>';
                 }
