@@ -77,6 +77,10 @@ Or delete the following lines from Plugin/ViewContentFactory/Controller/SheetsCo
         $this->Auth->allow('view');
     }
 
+### dynamic pages suport
+
+For the forms to grow, jquery is required. Otherwise it is not necisary.
+
 ### Create your pages
 
 Goto www.youresite.com/view_content_factory/sheets/ where the generated index will show you your
