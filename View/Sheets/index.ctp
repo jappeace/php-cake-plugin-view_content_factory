@@ -14,9 +14,9 @@
 		    <td><?php echo h($sheet['Sheet']['name']); ?>&nbsp;</td>
 		    <td><?php echo h($sheet['Sheet']['view_name']); ?>&nbsp;</td>
 		    <td class="actions">
-			    <?php echo $this->Html->link(__('View'), array('action' => 'view', $sheet['Sheet']['id'])); ?>
-			    <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $sheet['Sheet']['id'])); ?>
-			    <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $sheet['Sheet']['id']), null, __('Are you sure you want to delete # %s?', $sheet['Sheet']['id'])); ?>
+			    <?php echo $this->Html->link(__('View'), array('action' => 'view', $sheet['Sheet']['name'])); ?>
+			    <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $sheet['Sheet']['name'])); ?>
+			    <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $sheet['Sheet']['name']), null, __('Are you sure you want to delete # %s?', $sheet['Sheet']['id'])); ?>
 		    </td>
 	    </tr>
     <?php endforeach; ?>
@@ -39,10 +39,6 @@
 	    <h3><?php echo __('Actions'); ?></h3>
 	    <ul>
 		    <li><?php echo $this->Html->link(__('New Sheet'), array('action' => 'add')); ?></li>
-		    <li><?php echo $this->Html->link(__('List Sheet Contents'), array('controller' => 'sheet_contents', 'action' => 'index')); ?> </li>
-		    <li><?php echo $this->Html->link(__('New Sheet Content'), array('controller' => 'sheet_contents', 'action' => 'add')); ?> </li>
-		    <li><?php echo $this->Html->link(__('List Sheet Structures'), array('controller' => 'sheet_structures', 'action' => 'index')); ?> </li>
-		    <li><?php echo $this->Html->link(__('New Sheet Structure'), array('controller' => 'sheet_structures', 'action' => 'add')); ?> </li>
 	    </ul>
     </div>
 </div>
