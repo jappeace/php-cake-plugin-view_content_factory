@@ -76,7 +76,9 @@ this example can grow:
 	  title,
 	  url 
        )  !struct! #@
+
 so in php you will read it as: 
+
     $nav[0]['title'] $nav[0]['url']
     $nav[1]['title'] $nav[1]['url']
 
