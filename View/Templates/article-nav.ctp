@@ -5,10 +5,10 @@
         url 
      )  !struct! #@*/
 ?>
-<article class="sturctural">
+<article class="structural">
     <?php echo $article; ?>
 </article>
-<aside class="sturctural">
+<aside class="structural">
     <nav>
     <?php foreach($nav as $link){
 	?><a href="<?=$link['url']?>"><?=$link['title']?></a><?php
