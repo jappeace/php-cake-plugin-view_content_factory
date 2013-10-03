@@ -40,6 +40,8 @@ Add this to your bootsrap.php
 
 ### Authentication
 
+Chose either the safe way or the workaround, but not both.
+
 #### The safe way
 
 Configure you auth componenent in your appcontroller:
