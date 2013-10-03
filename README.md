@@ -37,25 +37,33 @@ directory inside the plugin and the root app. As long as the files end with .ctp
 ### Open tags
 
 The parsing starts with the 
+
     @# 
+
 charsequense and ends with 
+
     #@ 
+
 inside the views.
 
 ### defining a content variable
 
 To define a content simply open parsing insert the var label and close it with the content marker.
 For example the following code will create a article variable in your view filled with the content:
+
     @#article !content!#@
+
 Contents are quite easy.
 
 ### defining a structure or array
 
 This is more complex and best shown as an example:
+
       @#nav(
         title,
         url 
      )  !struct! #@
+
 this will create a variable $nav with a title and url key. ie $nav['title'] and $nav['url]. Note you
 can only fill in one title and one url here. That was not good enough to make a dynamic menu so
 I added another feature:
@@ -63,6 +71,7 @@ I added another feature:
 ### defining a anonymous structure
 
 this example can grow:
+
     @#nav[](
 	  title,
 	  url 
@@ -70,17 +79,21 @@ this example can grow:
 so in php you will read it as: 
     $nav[0]['title'] $nav[0]['url']
     $nav[1]['title'] $nav[1]['url']
+
 etc etc.
 
 ### misc
 In structures you can also add options trough:
+
     @#nav[](
 	  title:awesome|lame|themiddle,
 	  url 
        )  !struct! #@
+
 But I will might change this syntax later on.
 
 recursive structures are also allowed:
+
     @#nav[](
 	  name(
 		prefix:awesome|lame|themiddle,
@@ -88,7 +101,9 @@ recursive structures are also allowed:
 	  ),
 	  url 
        )  !struct! #@
+
 so is the anonymous form:
+
     @#nav[](
 	  name[](
 		prefix:awesome|lame|themiddle,
