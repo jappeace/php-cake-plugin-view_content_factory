@@ -46,7 +46,7 @@ function changeForm(){
     $('#cms-for-'+file).removeClass('hidden');
 }
 function useExisting(button){
-	$.ajax({0:"success", 1:"listOptions()", async:true, data:"viewName=$('#SheetViewName').val()&varName=button.value", dataType:"html", url:"\/view_content_factory\/Sheets\/findOptions"});}
+	$.ajax({0:"success", 1:"listOptions()", async:true, dataType:"html", url:"\/view_content_factory\/Sheets\/findOptions\/"+$('#SheetViewName').val()+"\/"+button.value});}
 function listOptions(){
     alert('show list');
 }
