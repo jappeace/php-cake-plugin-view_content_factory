@@ -1,5 +1,6 @@
 <?php
 App::uses('AppModel', 'Model');
+App::uses('Iinterpetable', 'Model/Interface');
 /**
  * SheetStructure Model
  *
