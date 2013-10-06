@@ -39,7 +39,7 @@ function shrinkForm(button){
     if($('.'+'form-element-' + button.value).length > 1){
         getElement(button).remove();
     }else{
-        if(confirm('Total eradication of form elements is not recomended, a page reload is required to get em back, continue?')){
+        if(confirm('Total eradication of form elements is not recomended, a page reload is required to get \'em back, continue?')){
             getElement(button).remove();
         }
     }

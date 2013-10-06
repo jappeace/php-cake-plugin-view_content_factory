@@ -1,1 +1,61 @@
-$(document).ready(function(){function t(e){return $("."+"form-element-"+e.value).first()}function n(n){original=t(n);clone=original.clone(true);e++;var r=n.value.split("_");var s="data";for(i=0;i<r.length;i++){s+="["+r[i]+"]"}clone.find('input[name^="'+s+'"]').each(function(t){rename=s;name=$(this).attr("name").valueOf();name=name.substr(rename.length);pieces=name.split("][");rename+="["+e+"][";for(i=1;i<pieces.length;i++){rename+=pieces[i]+"]["}rename=pieces.length<=1?rename.substr(0,rename.length-1):rename.substr(0,rename.length-2);$(this).attr("name",rename)});original.after(clone)}function r(e){if($("."+"form-element-"+e.value).length>1){t(e).remove()}else{if(confirm("Total eradication of form elements is not recomended, a page reload is required to get em back, continue?")){t(e).remove()}}}function s(){var e=$("#SheetViewName option:selected").val();$(".hide-target").removeClass("hidden").addClass("hidden");$("#cms-for-"+e).removeClass("hidden")}$("#SheetViewName").bind("change",function(e){s();return false});$(".form-grow").bind("click",function(e){n(this);return false});$(".form-shrink").bind("click",function(e){r(this);return false});var e=0;s()})
+//<![CDATA[
+$(document).ready(function () {var cssEscapeChar = '_'
+var callcount = 0;
+function getElement(button){
+    return $('.'+'form-element-' + button.value).first();
+}
+function growForm(button){        
+    original = getElement(button);
+    clone = original.clone(true);
+    callcount++;
+    var vals = button.value.split(cssEscapeChar);
+    var string = 'data';
+    for(i=0; i<vals.length; i++){
+        string += '\[' +vals[i] + '\]';
+    }
+    clone.find('input[name^=\"'+string+'\"]').each(
+        function( index ) {
+            rename = string;
+            name = $(this).attr('name').valueOf();
+            name = name.substr(rename.length);
+            pieces = name.split('][');
+            rename += '['+callcount+'][';
+
+            for(i=1; i<pieces.length; i++){
+                rename += pieces[i] + '][';
+            }
+
+            rename = (pieces.length <= 1)? rename.substr(0,rename.length -1) : rename.substr(0, rename.length -2);
+            $(this).attr('name', rename);
+        }
+    );
+    original.after(clone);
+}
+function shrinkForm(button){
+    if($('.'+'form-element-' + button.value).length > 1){
+        getElement(button).remove();
+    }else{
+        if(confirm('Total eradication of form elements is not recomended, a page reload is required to get em back, continue?')){
+            getElement(button).remove();
+        }
+    }
+}
+function changeForm(){
+    var file = $('#SheetViewName option:selected').val();
+    $('.hide-target').removeClass('hidden').addClass('hidden');
+    $('#cms-for-'+file).removeClass('hidden');
+}
+function useExisting(button){
+	alert(button.value + $('#SheetViewName').val());	
+}
+changeForm();
+
+$(".form-find").bind("click", function (event) {useExisting(this)
+return false;});
+$("#SheetViewName").bind("change", function (event) {changeForm();
+return false;});
+$(".form-grow").bind("click", function (event) {growForm(this);
+return false;});
+$(".form-shrink").bind("click", function (event) {shrinkForm(this);
+return false;});});
+//]]>
