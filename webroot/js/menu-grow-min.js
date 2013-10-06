@@ -45,11 +45,12 @@ function changeForm(){
     $('.hide-target').removeClass('hidden').addClass('hidden');
     $('#cms-for-'+file).removeClass('hidden');
 }
-function useExisting(button){
-	$.ajax({0:"success", 1:"listOptions()", async:true, dataType:"html", url:"\/view_content_factory\/Sheets\/findOptions\/"+$('#SheetViewName').val()+"\/"+button.value});}
-function listOptions(){
-    alert('show list');
+function listOptions(data, textStatus){
+    alert(textStatus + ':' + data);
 }
+function useExisting(button){
+	$.ajax({async:true, dataType:"html",success:function (data, textStatus) {listOptions(data, textStatus)}, url:"\/view_content_factory\/Sheets\/findOptions\/"+$('#SheetViewName').val()+"\/"+button.value});
+    }
 changeForm();
 
 $(".form-find").bind("click", function (event) {useExisting(this)
