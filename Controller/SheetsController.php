@@ -142,5 +142,9 @@ class SheetsController extends ViewContentFactoryAppController {
         return $this->redirect(array('action' => 'index'));
     }
     
+    public function findOptions($viewName, $varName){
+	$this->layout = $this->plugin .'.ajax';
+	
+    }
 
 }

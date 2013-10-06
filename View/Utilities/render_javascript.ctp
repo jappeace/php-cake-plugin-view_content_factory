@@ -50,7 +50,25 @@ function changeForm(){
     $('#cms-for-'+file).removeClass('hidden');
 }
 function useExisting(button){
-	alert(button.value + $('#SheetViewName').val());	
+	<?php echo $this->Js->request(
+		array(
+		    'controller' => 'Sheets',
+		    'action' => 'findOptions'		    
+		),
+		array(
+		    'data' => array(
+			'viewName' => '$(\'#SheetViewName\').val()', 
+			'varName' => 'button.value'
+		    ),
+		    'async' => true,
+		    'type' => 'html',
+		    'success', 'listOptions()'
+		)
+	    );
+	?>
+}
+function listOptions(){
+    alert('show list');
 }
 changeForm();
 <?php

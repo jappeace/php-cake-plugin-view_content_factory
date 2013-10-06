@@ -35,7 +35,7 @@ function shrinkForm(button){
     if($('.'+'form-element-' + button.value).length > 1){
         getElement(button).remove();
     }else{
-        if(confirm('Total eradication of form elements is not recomended, a page reload is required to get em back, continue?')){
+        if(confirm('Total eradication of form elements is not recomended, a page reload is required to get \'em back, continue?')){
             getElement(button).remove();
         }
     }
@@ -46,7 +46,9 @@ function changeForm(){
     $('#cms-for-'+file).removeClass('hidden');
 }
 function useExisting(button){
-	alert(button.value + $('#SheetViewName').val());	
+	$.ajax({0:"success", 1:"listOptions()", async:true, data:"viewName=$('#SheetViewName').val()&varName=button.value", dataType:"html", url:"\/view_content_factory\/Sheets\/findOptions"});}
+function listOptions(){
+    alert('show list');
 }
 changeForm();
 
