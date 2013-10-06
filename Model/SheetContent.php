@@ -6,7 +6,7 @@ App::uses('AppModel', 'Model');
  * @property Sheet $Sheet
  * @property Content $Content
  */
-class SheetContent extends ViewContentFactoryAppModel {
+class SheetContent extends ViewContentFactoryAppModel implements Iinterpetable {
 
 /**
  * Display field
@@ -85,4 +85,14 @@ class SheetContent extends ViewContentFactoryAppModel {
            }  
            
         }
+
+    public function interpet($data, $callback) {
+	$data = $data['SheetContent'];
+	foreach($data as $contentPointer){
+	    $content = $this->Content->findById($contentPointer['content_id']);
+	    $callback($content['Content']['name'], $content['Content']['value']);
+	}
+    }
+	
+	
 }

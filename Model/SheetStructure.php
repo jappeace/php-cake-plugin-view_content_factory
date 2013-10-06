@@ -6,7 +6,7 @@ App::uses('AppModel', 'Model');
  * @property Sheet $Sheet
  * @property Structure $Structure
  */
-class SheetStructure extends ViewContentFactoryAppModel {
+class SheetStructure extends ViewContentFactoryAppModel implements Iinterpetable {
 
 /**
  * Display field
@@ -103,4 +103,31 @@ class SheetStructure extends ViewContentFactoryAppModel {
                 
             }
         }
+
+    public function interpet($data, $callback) {
+	$data = $data['SheetStructure'];
+	foreach($data as $structurePointer){
+	    $struct = $this->SheetStructure->Structure;
+	    $parent = $struct->read(array('lft','rght'), $structurePointer['structure_id']);
+	    $structure = $struct->find('threaded',array(
+		'fields' => array(
+		    'name', 
+		    'value', 
+		    'parent_id'
+		),
+		'conditions' => array(
+		    'Structure.lft >=' => $parent['Structure']['lft'],
+		    'Structure.rght <=' => $parent['Structure']['rght'] 
+		)
+	    ));
+	    foreach($structure as $s){
+		if($s['Structure']['id'] == $structurePointer['structure_id']){ // did not work with conditions because it filtered out the childeren
+		    $result = $struct->viewPrepare($s);
+		    foreach($result as $key => $value){
+			$callback($key, $value);
+		    }
+		}
+	    }
+	}	
+    }
 }

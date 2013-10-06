@@ -142,8 +142,15 @@ class SheetsController extends ViewContentFactoryAppController {
         return $this->redirect(array('action' => 'index'));
     }
     
+    /**
+     * Handles an ajax request, to find existing sheets with that view name 
+     * @param type $viewName
+     * @param type $varName
+     */
     public function findOptions($viewName, $varName){
+	// response is gonna be ajax
 	$this->layout = $this->plugin .'.ajax';
+	$this->set('sheets', $this->Sheet->getNamesByViewAndVar($viewName, $varName));
 	
     }
 

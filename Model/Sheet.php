@@ -48,7 +48,16 @@ class Sheet extends ViewContentFactoryAppModel {
 		    'className' => 'ViewContentFactory.Template'
 		)
 	    );
-        
+	
+	/**
+	 * allows runtime changing of the interpet method
+	 * @var type 
+	 */
+        private $interpatables;
+	public function __construct($id = false, $table = null, $ds = null) {
+	    parent::__construct($id, $table, $ds);
+	    $this->interpatables = array($this->SheetContent, $this->SheetStructure);
+	}
         /**
          * interpets the data from the database by selecting a sheet by name and then call the
          * the calback with as parameters the data of the other models.
@@ -62,34 +71,13 @@ class Sheet extends ViewContentFactoryAppModel {
             if (!$d) {
                 throw new NotFoundException(__('Invalid sheet'));
             }
-            foreach($d['SheetContent'] as $contentPointer){
-                $content = $this->SheetContent->Content->findById($contentPointer['content_id']);
-                $callback($content['Content']['name'], $content['Content']['value']);
-            }
-            foreach($d['SheetStructure'] as $structurePointer){
-                $struct = $this->SheetStructure->Structure;
-                $parent = $struct->read(array('lft','rght'), $structurePointer['structure_id']);
-                $structure = $struct->find('threaded',array(
-                    'fields' => array(
-                        'name', 
-                        'value', 
-                        'parent_id'
-                    ),
-                    'conditions' => array(
-                        'Structure.lft >=' => $parent['Structure']['lft'],
-                        'Structure.rght <=' => $parent['Structure']['rght'] 
-                    )
-                ));
-                foreach($structure as $s){
-                    if($s['Structure']['id'] == $structurePointer['structure_id']){ // did not work with conditions because it filtered out the childeren
-                        $result = $struct->viewPrepare($s);
-                        foreach($result as $key => $value){
-                            $callback($key, $value);
-                        }
-                    }
-                }
-
-            }
+	    
+	    foreach($this->interpatables as $interpatable){
+		if(!$interpatable instanceof Iinterpetable){
+		    throw new CakeException("Could not interped data");
+		}
+		$interpatable->interpet($d, $callback);
+	    }
             return $d['Sheet']['view_name'];
         }
         
@@ -130,5 +118,35 @@ class Sheet extends ViewContentFactoryAppModel {
         public function getIdBy($name){
             return $this->findByName($name)['Sheet']['id'];
         }
+	
+	public function getNamesByViewAndVar($view, $var){
+	    // determin which model to target
+	    $names = explode('.', $var);
+	    $var = substr($var, stripos($var, '.')+1);
+	    
+	    $sheets = $this->find('all', 
+		array(
+		    'conditions' => array(
+			'view_name' => $view
+		    ),
+		    'fields' => array(
+			'id',
+			'name'
+		    ),
+		    'recursive' => -1
+		)
+	    );
+	    
+	    if($names[0] === 'content'){
+
+	    }elseif($names[0] === 'struct'){
+
+	    }else{
+		// somthing different, exit
+		throw new CakeException("Unknown type");
+	    }
+	    
+	    return $sheets;
+	}
 
 }

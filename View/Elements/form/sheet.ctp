@@ -64,7 +64,7 @@ foreach($views as $fileName => $contents){
                         )
                     );
                     
-		    echo existingButton($element[$i], $this);
+		    echo existingButton('content.'.$element[$i], $this);
                     ?>
                     </div>
                     <?php
@@ -84,7 +84,7 @@ foreach($views as $fileName => $contents){
                     echo $render->renderLi().
                             $varName.
                             $render->getButtons().
-			    existingButton($varName, $this).
+			    existingButton('struct.'.$varName, $this).
                             $this->Structure->input($part, $path). 
                         '</li>';
                 }
