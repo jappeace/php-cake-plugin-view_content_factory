@@ -49,26 +49,24 @@ function changeForm(){
     $('.hide-target').removeClass('hidden').addClass('hidden');
     $('#cms-for-'+file).removeClass('hidden');
 }
+function listOptions(data, textStatus){
+    alert(textStatus + ':' + data);
+}
 function useExisting(button){
 	<?php echo $this->Js->request(
 		array(
 		    'controller' => 'Sheets',
-		    'action' => 'findOptions'		    
+		    'action' => 'findOptions',
+		    '$(\'#SheetViewName\').val()', 
+		    'button.value'		    
 		),
 		array(
-		    'data' => array(
-			'viewName' => '$(\'#SheetViewName\').val()', 
-			'varName' => 'button.value'
-		    ),
 		    'async' => true,
 		    'type' => 'html',
-		    'success', 'listOptions()'
+		    'success' => 'listOptions(data, textStatus)'
 		)
 	    );
 	?>
-}
-function listOptions(){
-    alert('show list');
 }
 changeForm();
 <?php
