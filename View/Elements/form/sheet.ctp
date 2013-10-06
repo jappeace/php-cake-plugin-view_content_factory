@@ -1,11 +1,11 @@
 <?php
-function existingButton($name){
-    return $this->Form->button(
-	 'find existing '.$element[$i],
+function existingButton($name, $view){
+    return $view->Form->button(
+	 'use existing',
 	 array(
 	    'class' => 'form-find',
 	    'type' => 'button',
-	    'value' => $element[$i]
+	    'value' => $name
 	)
     );  
 }
@@ -55,6 +55,7 @@ foreach($views as $fileName => $contents){
                     <label><?php echo $element[$i]; ?></label>
                     <?php
                     
+		    
                     echo $this->Form->textarea(
                         $fileName .'.'. ucfirst($type) .'.'.$i.'.'.$element[$i], 
                         array(
@@ -63,7 +64,7 @@ foreach($views as $fileName => $contents){
                         )
                     );
                     
-		    echo existingButton($element[$i]);
+		    echo existingButton($element[$i], $this);
                     ?>
                     </div>
                     <?php
@@ -83,7 +84,7 @@ foreach($views as $fileName => $contents){
                     echo $render->renderLi().
                             $varName.
                             $render->getButtons().
-			    existingButton($varName).
+			    existingButton($varName, $this).
                             $this->Structure->input($part, $path). 
                         '</li>';
                 }

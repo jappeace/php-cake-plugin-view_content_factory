@@ -9,7 +9,7 @@ App::uses('AppController', 'Controller');
  * @property PaginatorComponent $Paginator
  */
 class SheetsController extends ViewContentFactoryAppController {
-    public $helpers = array('Js' => array('Jquery'), 'ViewContentFactory.Structure');
+    
     /**
      * Components
      *

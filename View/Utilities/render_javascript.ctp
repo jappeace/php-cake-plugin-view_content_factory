@@ -1,11 +1,9 @@
-<?php
-
-/*
- *  See jappieklooster.nl/license for more information about the licensing
- */
-class StructureHelper extends AppHelper {
-public function writeJS(){
-       return "
+<p>
+    See the pagesource for the script...
+</p>
+<script> <!-- empty script tags for code highlighting in the source. Fooled the editor-->
+<?php ob_start();?>
+var cssEscapeChar = '<?php echo StructureHelper::CSS_ESCAPE_CHAR; ?>'
 var callcount = 0;
 function getElement(button){
     return $('.'+'form-element-' + button.value).first();
@@ -14,7 +12,7 @@ function growForm(button){
     original = getElement(button);
     clone = original.clone(true);
     callcount++;
-    var vals = button.value.split('".StructureHelper::CSS_ESCAPE_CHAR."');
+    var vals = button.value.split(cssEscapeChar);
     var string = 'data';
     for(i=0; i<vals.length; i++){
         string += '\[' +vals[i] + '\]';
@@ -51,10 +49,16 @@ function changeForm(){
     $('.hide-target').removeClass('hidden').addClass('hidden');
     $('#cms-for-'+file).removeClass('hidden');
 }
-changeForm();".
+function useExisting(button){
+	alert(button.value + $('#SheetViewName').val());	
+}
+changeForm();
+<?php
+$this->Js->buffer(ob_get_clean());
+echo
+$this->Js->get('.form-find')->event('click', 'useExisting(this)').
 $this->Js->get('#SheetViewName')->event('change', 'changeForm();') .
 $this->Js->get('.form-grow')->event('click', 'growForm(this);') .
 $this->Js->get('.form-shrink')->event('click', 'shrinkForm(this);');
-   }
-}
 ?>
+</script>
