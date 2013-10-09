@@ -1,3 +1,3 @@
-<code><pre><?php
-print_r(get_defined_vars());
-?></pre></code>
+<?php
+// yeah... thats it
+echo json_encode($sheets);
