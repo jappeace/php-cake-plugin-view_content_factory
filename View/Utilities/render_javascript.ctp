@@ -49,9 +49,6 @@ function changeForm(){
     $('.hide-target').removeClass('hidden').addClass('hidden');
     $('#cms-for-'+file).removeClass('hidden');
 }
-function listOptions(data, textStatus){
-    alert(textStatus + ':' + data);
-}
 // WARNING the generated url is wrong, it needs to be dynamic as in the source.
 function useExisting(button){
 	<?php echo $this->Js->request(

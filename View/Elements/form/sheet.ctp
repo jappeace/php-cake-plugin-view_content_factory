@@ -9,7 +9,15 @@ function existingButton($name, $view){
 	)
     );  
 }
-$this->Html->script('ViewContentFactory.menu-grow-min', array('block' => 'script'));
+$this->Html->script(
+    array(
+	'ViewContentFactory.list-options',
+	'ViewContentFactory.menu-grow-min'
+    ), 
+    array(
+	'block' => 'script'
+    )
+);
 if(isset($values)){
     $this->Structure->setValues($values);
 }
