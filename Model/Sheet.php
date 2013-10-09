@@ -139,14 +139,35 @@ class Sheet extends ViewContentFactoryAppModel {
 	    );
 	    
 	    if($names[0] === 'content'){
-
+		$this->interpatables = array($this->SheetContent);
+		$this->interpetAll($sheets);
+		
 	    }elseif($names[0] === 'struct'){
-
+		$this->interpatables = array($this->SheetStructure);
+		$this->interpetAll($sheets);
 	    }else{
 		// somthing different, exit
 		throw new CakeException("Unknown type");
 	    }
 	    
+	    $this->interpatables = array($this->SheetContent, $this->SheetStructure);
+	    return $sheets;
+	}
+	
+	/**
+	 * interpet all the sheets and adds the result to a data key.
+	 * @param type $sheets
+	 * @return type $sheets
+	 */
+	private function interpetAll(&$sheets){
+	    $length = count($sheets);
+	    for($i = 0; $i < $length; $i++){
+		$this->interpet($sheets[$i]['Sheet']['name'], 
+		    function($key, $value) use($sheets, $i){
+			$sheets[$i]['data'][$key] = $value;
+		    }
+		);
+	    }	    
 	    return $sheets;
 	}
 
