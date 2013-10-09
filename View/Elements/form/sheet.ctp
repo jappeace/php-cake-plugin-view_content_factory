@@ -10,9 +10,10 @@ function existingButton($name, $view){
     );  
 }
 $this->Html->script(
-    array(
+	array(
 	'ViewContentFactory.list-options',
 	'ViewContentFactory.menu-grow-min'
+	'ViewContentFactory.initialize',
     ), 
     array(
 	'block' => 'script'

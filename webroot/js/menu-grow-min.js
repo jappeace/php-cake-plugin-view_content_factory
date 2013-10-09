@@ -1,24 +1,24 @@
 //<![CDATA[
-$(document).ready(function () { var cssEscapeChar = '_'
+var cssEscapeChar = '_';
 var callcount = 0;
 function getElement(button){
     return $('.'+'form-element-' + button.value).first();
 }
-function growForm(button){        
-    original = getElement(button);
-    clone = original.clone(true);
+function growForm(button){
+	var original = getElement(button);
+    var clone = original.clone(true);
     callcount++;
     var vals = button.value.split(cssEscapeChar);
     var string = 'data';
-    for(i=0; i<vals.length; i++){
-        string += '\[' +vals[i] + '\]';
+    for(var i=0; i<vals.length; i++){
+        string += '[' +vals[i] + ']';
     }
     clone.find('input[name^=\"'+string+'\"]').each(
         function( index ) {
-            rename = string;
+            var rename = string;
             name = $(this).attr('name').valueOf();
             name = name.substr(rename.length);
-            pieces = name.split('][');
+            var pieces = name.split('][');
             rename += '['+callcount+'][';
 
             for(i=1; i<pieces.length; i++){
@@ -45,14 +45,4 @@ function changeForm(){
     $('.hide-target').removeClass('hidden').addClass('hidden');
     $('#cms-for-'+file).removeClass('hidden');
 }
-changeForm();
-
-$(".form-find").bind("click", function (event) {useExisting(this)
-return false;});
-$("#SheetViewName").bind("change", function (event) {changeForm();
-return false;});
-$(".form-grow").bind("click", function (event) {growForm(this);
-return false;});
-$(".form-shrink").bind("click", function (event) {shrinkForm(this);
-return false;});});
 //]]>
