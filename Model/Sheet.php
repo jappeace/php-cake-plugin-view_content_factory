@@ -1,6 +1,6 @@
 <?php
 App::uses('AppModel', 'Model');
-App::uses('Iinterpetable', 'Model/Interface');
+App::uses('Iinterpetable', 'ViewContentFactory.Model/Interface');
 /**
  * Sheet Model
  *
@@ -140,11 +140,11 @@ class Sheet extends ViewContentFactoryAppModel {
 	    
 	    if($names[0] === 'content'){
 		$this->interpatables = array($this->SheetContent);
-		$this->interpetAll($sheets);
+		$this->interpetAll($sheets, $var);
 		
 	    }elseif($names[0] === 'struct'){
 		$this->interpatables = array($this->SheetStructure);
-		$this->interpetAll($sheets);
+		$this->interpetAll($sheets, $var);
 	    }else{
 		// somthing different, exit
 		throw new CakeException("Unknown type");
@@ -159,15 +159,27 @@ class Sheet extends ViewContentFactoryAppModel {
 	 * @param type $sheets
 	 * @return type $sheets
 	 */
-	private function interpetAll(&$sheets){
+	private function interpetAll(&$sheets, $filter){
+	    // editing the sheets while looping trough them is a bad idea. thats why a copy is required
+	    $result = $sheets;
 	    $length = count($sheets);
 	    for($i = 0; $i < $length; $i++){
 		$this->interpet($sheets[$i]['Sheet']['name'], 
-		    function($key, $value) use($sheets, $i){
-			$sheets[$i]['data'][$key] = $value;
+		    function($key, $value) use(&$result, $i, $filter){
+			if($key == $filter){
+			    // clean up the nesting
+			    $result[$i] = $result[$i]['Sheet'];
+			    
+			    // data and selected element
+			    $result[$i]['key'] = $filter;
+			    $result[$i]['value'] = $value;
+			}else{
+			    unset($result[$i]);
+			}
 		    }
 		);
-	    }	    
+	    }
+	    $sheets = $result;
 	    return $sheets;
 	}
 

@@ -1,6 +1,6 @@
 <?php
 App::uses('AppModel', 'Model');
-App::uses('Iinterpetable', 'Model/Interface');
+App::uses('Iinterpetable', 'ViewContentFactory.Model/Interface');
 /**
  * SheetStructure Model
  *
