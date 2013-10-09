@@ -108,7 +108,7 @@ class SheetStructure extends ViewContentFactoryAppModel implements Iinterpetable
     public function interpet($data, $callback) {
 	$data = $data['SheetStructure'];
 	foreach($data as $structurePointer){
-	    $struct = $this->SheetStructure->Structure;
+	    $struct = $this->Structure;
 	    $parent = $struct->read(array('lft','rght'), $structurePointer['structure_id']);
 	    $structure = $struct->find('threaded',array(
 		'fields' => array(
