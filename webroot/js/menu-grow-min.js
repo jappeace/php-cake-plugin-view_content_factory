@@ -1,5 +1,5 @@
 //<![CDATA[
-$(document).ready(function () {var cssEscapeChar = '_'
+$(document).ready(function () { var cssEscapeChar = '_'
 var callcount = 0;
 function getElement(button){
     return $('.'+'form-element-' + button.value).first();
@@ -45,12 +45,6 @@ function changeForm(){
     $('.hide-target').removeClass('hidden').addClass('hidden');
     $('#cms-for-'+file).removeClass('hidden');
 }
-function listOptions(data, textStatus){
-    alert(textStatus + ':' + data);
-}
-function useExisting(button){
-	$.ajax({async:true, dataType:"html",success:function (data, textStatus) {listOptions(data, textStatus)}, url:"\/view_content_factory\/Sheets\/findOptions\/"+$('#SheetViewName').val()+"\/"+button.value});
-    }
 changeForm();
 
 $(".form-find").bind("click", function (event) {useExisting(this)
