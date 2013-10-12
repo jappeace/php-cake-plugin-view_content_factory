@@ -128,30 +128,34 @@ class Sheet extends ViewContentFactoryAppModel {
 	    $sheets = $this->find('all', 
 		array(
 		    'conditions' => array(
-			'view_name' => $view
+				'view_name' => $view
 		    ),
 		    'fields' => array(
-			'id',
-			'name'
+				'id',
+				'name'
 		    ),
 		    'recursive' => -1
 		)
 	    );
 	    
 	    if($names[0] === 'content'){
-		$this->interpatables = array($this->SheetContent);
-		$this->interpetAll($sheets, $var);
-		
-	    }elseif($names[0] === 'struct'){
-		$this->interpatables = array($this->SheetStructure);
-		$this->interpetAll($sheets, $var);
+			$this->interpatables = array($this->SheetContent);
+			$this->interpetAll($sheets, $var);
+	    }elseif($names[0] === 'structure'){
+			$this->interpatables = array($this->SheetStructure);
+			$this->interpetAll($sheets, $var);
 	    }else{
-		// somthing different, exit
-		throw new CakeException("Unknown type");
-	    }
-	    
+			// somthing different, exit
+			throw new CakeException("Unknown type");
+		}
+		$return = array();
+		$return["data"] = $sheets;
+		$return["type"] = $names[0];
+		$return["viewName"] = $view;
+		$return["varName"] = $var;
+
 	    $this->interpatables = array($this->SheetContent, $this->SheetStructure);
-	    return $sheets;
+	    return $return;
 	}
 	
 	/**

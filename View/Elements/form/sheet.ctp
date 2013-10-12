@@ -12,8 +12,8 @@ function existingButton($name, $view){
 $this->Html->script(
 	array(
 	'ViewContentFactory.list-options',
-	'ViewContentFactory.menu-grow-min'
-	'ViewContentFactory.initialize',
+	'ViewContentFactory.menu-grow-min',
+	'ViewContentFactory.initialize'
     ), 
     array(
 	'block' => 'script'
@@ -62,19 +62,19 @@ foreach($views as $fileName => $contents){
                     ?>
                     <div class="input textearea">
                     <label><?php echo $element[$i]; ?></label>
-                    <?php
+					<div class="value-<?=$fileName?>-<?=$element[$i]?>"><?php
                     
-		    
                     echo $this->Form->textarea(
-                        $fileName .'.'. ucfirst($type) .'.'.$i.'.'.$element[$i], 
+                        $fileName .'.'. ucfirst($type) . $element[$i], 
                         array(
                             'label' => $element[$i],
                             'value' => (isset($values[$element[$i]]))? $values[$element[$i]] : ''
                         )
                     );
                     
-		    echo existingButton('content.'.$element[$i], $this);
-                    ?>
+					echo existingButton('content.'.$element[$i], $this);
+					?>
+					</div>
                     </div>
                     <?php
                 }
@@ -89,13 +89,16 @@ foreach($views as $fileName => $contents){
                     // allows top level anonymus arrays
                     $render = $this->Structure->createMenu($varName, $path);
                     $path .= '.'.$varName. $render->getNumberString();
-                    
-                    echo $render->renderLi().
+					
+					echo 
+						'<div class="value-'.$fileName.'-'.$varName.'">'.
+						$render->renderLi().
                             $varName.
                             $render->getButtons().
-			    existingButton('struct.'.$varName, $this).
-                            $this->Structure->input($part, $path). 
-                        '</li>';
+							existingButton('structure.'.$varName, $this).
+							$this->Structure->input($part, $path). 
+                        '</li>'.
+						'</div>';
                 }
                 ?>
                 </ul>
@@ -109,3 +112,17 @@ foreach($views as $fileName => $contents){
 }
 echo $this->Form->end(__('Submit')); ?>
 </div>
+<?php
+	// allows options to be placed instead of an value 
+?>
+<template class="hidden options-template">
+	<div>
+	<button>Use new</button>
+	<div class="input radio">
+		<label>
+			<input type="radio" />
+			<span class="name"></span>
+		</label>
+	</div>
+	</div>	
+</template>

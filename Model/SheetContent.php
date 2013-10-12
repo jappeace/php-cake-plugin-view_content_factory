@@ -56,34 +56,33 @@ class SheetContent extends ViewContentFactoryAppModel implements Iinterpetable {
          */
         public function parse($formData, $id){
             
-            foreach($formData as $content){
-               foreach($content as $key => $value){
-                   
-                   $this->create();
-                   $this->Content->create();
-                   
-                   if(!$this->Content->save(
-                       array(
-                           'name' => $key,
-                           'value' => $value
-                       )
-                   )){
-                       App::uses('SaveException', 'Controller/Exception');
-                       throw new SaveException(array('content' => 'Content'));
-                   }
-                   
-                   if(!$this->save(
-                       array(
-                           'sheet_id' => $id,
-                           'content_id' => $this->Content->id
-                       )
-                   )){
-                       App::uses('SaveException', 'Controller/Exception');
-                       throw new SaveException(array('content' => 'SheetContent'));
-                   }                    
+	    foreach($formData as $key => $value){
 
-               }
-           }  
+		$this->create();
+		$this->Content->create();
+
+		if(!$this->Content->save(
+		    array(
+			'name' => $key,
+			'value' => $value
+		    )
+		)){
+		    App::uses('SaveException', 'Controller/Exception');
+		    throw new SaveException(array('content' => 'Content'));
+		}
+
+		if(!$this->save(
+		    array(
+			'sheet_id' => $id,
+			'content_id' => $this->Content->id
+		    )
+		)){
+		    App::uses('SaveException', 'Controller/Exception');
+		    throw new SaveException(array('content' => 'SheetContent'));
+		}                    
+
+	    }
+           
            
         }
 
