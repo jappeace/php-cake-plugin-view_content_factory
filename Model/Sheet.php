@@ -49,10 +49,10 @@ class Sheet extends ViewContentFactoryAppModel {
 		    'className' => 'ViewContentFactory.Template'
 		)
 	    );
-	
+
 	/**
 	 * allows runtime changing of the interpet method
-	 * @var type 
+	 * @var type
 	 */
         private $interpatables;
 	public function __construct($id = false, $table = null, $ds = null) {
@@ -72,7 +72,7 @@ class Sheet extends ViewContentFactoryAppModel {
             if (!$d) {
                 throw new NotFoundException(__('Invalid sheet'));
             }
-	    
+
 	    foreach($this->interpatables as $interpatable){
 		if(!$interpatable instanceof Iinterpetable){
 		    throw new CakeException("Could not interped data");
@@ -81,7 +81,7 @@ class Sheet extends ViewContentFactoryAppModel {
 	    }
             return $d['Sheet']['view_name'];
         }
-        
+
         /**
          * parses the raw form data and adds it to the apropiate tables.
          * mainly by calling the parse functions of other models
@@ -90,10 +90,18 @@ class Sheet extends ViewContentFactoryAppModel {
          */
         public function parse($data){
             $this->create();
+	    echo '<pre>'.print_r($data, true) . '</pre>';
 			if ($this->save($data)) {
 				$keys = array_keys($this->hasMany);
 				foreach($keys as $type){
 					// shortcut for obvious reasons (its long)
+					if(!isset($data[
+								$data['Sheet']['view_name']
+							][
+								Inflector::pluralize(str_replace('Sheet', '', $type))
+							])){
+					    continue;
+					}
 					$target = $data[
 								$data['Sheet']['view_name']
 							][
@@ -117,7 +125,6 @@ class Sheet extends ViewContentFactoryAppModel {
             }
             return false;
         }
-        
         /**
          * the entire cms works by a unique name instead of id to make it more
          * user friendly. However cakephp prefers an id int field. this function
@@ -129,13 +136,11 @@ class Sheet extends ViewContentFactoryAppModel {
         public function getIdBy($name){
             return $this->findByName($name)['Sheet']['id'];
         }
-	
 	public function getNamesByViewAndVar($view, $var){
 	    // determin which model to target
 	    $names = explode('.', $var);
 	    $var = substr($var, stripos($var, '.')+1);
-	    
-	    $sheets = $this->find('all', 
+	    $sheets = $this->find('all',
 		array(
 		    'conditions' => array(
 				'view_name' => $view
@@ -147,7 +152,6 @@ class Sheet extends ViewContentFactoryAppModel {
 		    'recursive' => -1
 		)
 	    );
-	    
 	    if($names[0] === 'content'){
 			$this->interpatables = array($this->SheetContent);
 			$this->interpetAll($sheets, $var);
@@ -167,7 +171,6 @@ class Sheet extends ViewContentFactoryAppModel {
 	    $this->interpatables = array($this->SheetContent, $this->SheetStructure);
 	    return $return;
 	}
-	
 	/**
 	 * interpet all the sheets and adds the result to a data key.
 	 * @param type $sheets
@@ -183,7 +186,6 @@ class Sheet extends ViewContentFactoryAppModel {
 			if($key == $filter){
 			    // clean up the nesting
 			    $result[$i] = $result[$i]['Sheet'];
-			    
 			    // data and selected element
 			    $result[$i]['key'] = $filter;
 			    $result[$i]['value'] = $value;

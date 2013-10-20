@@ -1,3 +1,15 @@
+# UPDATE
+
+I no longer maintain this project in favour of other frameworks (ruby on rails, for easy programming or angular js because its cheaper in resources).
+This means that this project is Dead. So only use this to get snippsets of code or if you want to take the burden of maintenance on your shoulders. But you'l have to fork it.
+When I started this project I thought cakephp was the way to go in terms of web. Well it is if you are an weekend programmer. But for somoene
+who likes to think of himself as a professional its just wrong.
+
+## Things I would like have seen implemented but are not
+
+* Cross refrencing of exising data.
+* change the meta scriptinglanguage to JSON
+
 # View Content Factory
 
 This is a small cakephp plugin that can handle content management for you.
