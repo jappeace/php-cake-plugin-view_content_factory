@@ -90,19 +90,29 @@ class Sheet extends ViewContentFactoryAppModel {
          */
         public function parse($data){
             $this->create();
-                       
-            if ($this->save($data)) {
-                
-                // fix integrety
-                $this->SheetContent->parse(
-                    // value of key is dependond on which views are fetched and put into the form
-                    $data[$data['Sheet']['view_name']]['Contents'], 
-                    $this->id
-                );
-                $this->SheetStructure->parse(
-                    $data[$data['Sheet']['view_name']]['Structures'], 
-                    $this->id
-                );
+			if ($this->save($data)) {
+				$keys = array_keys($this->hasMany);
+				foreach($keys as $type){
+					// shortcut for obvious reasons (its long)
+					$target = $data[
+								$data['Sheet']['view_name']
+							][
+								Inflector::pluralize(str_replace('Sheet', '', $type))
+							];
+					if(isset($target['existing'])){
+						$this->$type->save(
+							array(
+								'sheet_id' => $this->id, 
+								Inflector::tableize($this->$type->name).'_id' => $target['existing']
+							)
+						);
+					}else{
+						$this->$type->parse(
+							$target,
+							$this->id
+						);
+					}
+				}
                 return true;
             }
             return false;

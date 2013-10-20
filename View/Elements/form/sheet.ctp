@@ -115,8 +115,7 @@ echo $this->Form->end(__('Submit')); ?>
 <?php
 	// allows options to be placed instead of an value 
 ?>
-<template class="hidden options-template">
-	<div>
+<div class="hidden options-template">
 	<button>Use new</button>
 	<div class="input radio">
 		<label>
@@ -124,5 +123,4 @@ echo $this->Form->end(__('Submit')); ?>
 			<span class="name"></span>
 		</label>
 	</div>
-	</div>	
-</template>
+</div>	
